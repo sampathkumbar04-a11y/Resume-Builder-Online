@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Fira+Code:wght@400;500;650&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Merriweather', Georgia, serif;
+  --font-mono: 'Fira Code', monospace;
+}
+
+/* Customized style additions for professional visual polish theme */
+body {
+  background-color: #f8fafc;
+}
+
+/* Custom Scrollbars for slick sidebar lists */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Print Specific Rules for perfect A4 output download */
+@media print {
+  /* Hide all interactive components */
+  header, 
+  aside, 
+  footer, 
+  button, 
+  .print\:hidden {
+    display: none !important;
+  }
+
+  body {
+    background-color: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Reset layout constraints to span fully */
+  main {
+    display: block !important;
+    height: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  section {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Force layout container to be 100% size instead of fixed scaling */
+  #resume-preview,
+  #cover-letter-preview {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    min-height: auto !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  /* Keep background graphics active if supported */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
