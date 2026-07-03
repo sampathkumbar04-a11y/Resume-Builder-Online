@@ -74,10 +74,13 @@ body {
 
   /* Force the resume and cover letter previews to be exactly A4 page dimensions */
   #resume-preview,
-  #cover-letter-preview {
+  #cover-letter-preview,
+  .resume-page {
     display: block !important;
     width: 210mm !important;
+    height: 297mm !important;
     min-height: 297mm !important;
+    max-height: 297mm !important;
     background: white !important;
     color: black !important;
     padding: 20mm !important; /* Proper standard margins on printable paper */
@@ -85,9 +88,11 @@ body {
     border: none !important;
     box-shadow: none !important;
     box-sizing: border-box !important;
-    overflow: visible !important;
-    page-break-after: avoid !important;
-    page-break-before: avoid !important;
+    overflow: hidden !important;
+  }
+
+  .resume-page:not(:last-child) {
+    page-break-after: always !important;
   }
 
   /* Avoid page break cutting through lists, cards, and headings */
@@ -96,6 +101,7 @@ body {
   #resume-preview .group,
   #resume-preview li,
   #resume-preview h3,
+  .resume-page div,
   .break-inside-avoid {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
