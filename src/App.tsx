@@ -913,11 +913,11 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen w-full bg-slate-50 text-slate-900 font-sans overflow-hidden">
+    <div className="flex flex-col h-screen w-full bg-slate-50 text-slate-900 font-sans overflow-hidden print:h-auto print:overflow-visible print:bg-white">
       
       {/* Toast Notification */}
       {toast && (
-        <div className={`fixed bottom-12 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-lg shadow-xl border text-sm max-w-sm transition-all animate-bounce ${
+        <div className={`fixed bottom-12 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-lg shadow-xl border text-sm max-w-sm transition-all animate-bounce print:hidden ${
           toast.type === "success" 
             ? "bg-emerald-50 border-emerald-200 text-emerald-900" 
             : toast.type === "error"

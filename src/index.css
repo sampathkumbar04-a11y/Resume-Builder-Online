@@ -33,6 +33,11 @@ body {
 
 /* Print Specific Rules for perfect A4 output download */
 @media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+
   /* Hide all interactive components */
   header, 
   aside, 
@@ -73,12 +78,22 @@ body {
   #cover-letter-preview {
     border: none !important;
     box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     width: 100% !important;
     min-height: auto !important;
     transform: none !important;
     overflow: visible !important;
+  }
+
+  /* Avoid page break cutting through cards/sections */
+  #resume-preview > div > div, 
+  #resume-preview div[key], 
+  #resume-preview .group,
+  #resume-preview li,
+  #resume-preview h3,
+  .break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
   /* Keep background graphics active if supported */
