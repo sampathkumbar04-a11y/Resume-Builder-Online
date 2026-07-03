@@ -35,57 +35,62 @@ body {
 @media print {
   @page {
     size: A4 portrait;
-    margin: 8mm;
+    margin: 0mm !important;
   }
 
-  /* Hide all interactive components */
+  /* Hide all interactive components, toasts, fixed widgets, and guides */
   header, 
   aside, 
   footer, 
   button, 
-  .print\:hidden {
+  .print\:hidden,
+  .fixed,
+  [role="alert"],
+  .toast,
+  .page-break-guide {
     display: none !important;
   }
 
-  body {
+  /* Reset outer viewport layouts to be fully white and borderless */
+  body, 
+  html, 
+  #root, 
+  main, 
+  section, 
+  .overflow-y-auto, 
+  div[style*="scale"] {
+    background: white !important;
     background-color: white !important;
     color: black !important;
     margin: 0 !important;
     padding: 0 !important;
+    width: 100% !important;
     height: auto !important;
-    width: 100% !important;
     overflow: visible !important;
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
   }
 
-  /* Reset layout constraints to span fully */
-  main {
-    display: block !important;
-    height: auto !important;
-    width: 100% !important;
-    overflow: visible !important;
-  }
-
-  section {
-    padding: 0 !important;
-    margin: 0 !important;
-    background: transparent !important;
-    width: 100% !important;
-    overflow: visible !important;
-  }
-
-  /* Force layout container to be 100% size instead of fixed scaling */
+  /* Force the resume and cover letter previews to be exactly A4 page dimensions */
   #resume-preview,
   #cover-letter-preview {
+    display: block !important;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    background: white !important;
+    color: black !important;
+    padding: 20mm !important; /* Proper standard margins on printable paper */
+    margin: 0 auto !important;
     border: none !important;
     box-shadow: none !important;
-    margin: 0 auto !important;
-    width: 100% !important;
-    min-height: auto !important;
-    transform: none !important;
+    box-sizing: border-box !important;
     overflow: visible !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
   }
 
-  /* Avoid page break cutting through cards/sections */
+  /* Avoid page break cutting through lists, cards, and headings */
   #resume-preview > div > div, 
   #resume-preview div[key], 
   #resume-preview .group,

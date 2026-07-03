@@ -2167,7 +2167,7 @@ export default function App() {
               {previewMode === "resume" ? (
                 <div 
                   id="resume-preview"
-                  className={`w-[620px] min-h-[876px] bg-white p-10 text-slate-900 border border-slate-300 print:border-none print:w-full print:p-0 print:m-0 font-${fontFamily}`}
+                  className={`relative w-[620px] min-h-[876px] bg-white p-10 text-slate-900 border border-slate-300 print:border-none font-${fontFamily}`}
                 >
                 
                 {/* -------------------- TEMPLATE 1: PROFESSIONAL POLISH (CLASSIC) -------------------- */}
@@ -2742,11 +2742,21 @@ export default function App() {
                   </div>
                 )}
 
+                {/* A4 Page Break Guides (Only visible on screen, hidden on print) */}
+                <div className="absolute left-0 right-0 top-[876px] border-b-2 border-dashed border-red-300 pointer-events-none print:hidden flex justify-between items-center px-4 z-10 select-none">
+                  <span className="text-[9px] bg-red-50 text-red-500 font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border border-red-100 shadow-xs -mt-2.5">A4 Page 1 End</span>
+                  <span className="text-[9px] bg-red-50 text-red-500 font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border border-red-100 shadow-xs -mt-2.5">A4 Page 2 Start</span>
+                </div>
+                <div className="absolute left-0 right-0 top-[1752px] border-b-2 border-dashed border-red-300 pointer-events-none print:hidden flex justify-between items-center px-4 z-10 select-none">
+                  <span className="text-[9px] bg-red-50 text-red-500 font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border border-red-100 shadow-xs -mt-2.5">A4 Page 2 End</span>
+                  <span className="text-[9px] bg-red-50 text-red-500 font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border border-red-100 shadow-xs -mt-2.5">A4 Page 3 Start</span>
+                </div>
+
               </div>
               ) : (
                 <div 
                   id="cover-letter-preview"
-                  className={`w-[620px] min-h-[876px] bg-white p-12 text-slate-900 border border-slate-300 print:border-none print:w-full print:p-0 print:m-0 font-${fontFamily} flex flex-col justify-between`}
+                  className={`relative w-[620px] min-h-[876px] bg-white p-12 text-slate-900 border border-slate-300 print:border-none font-${fontFamily} flex flex-col justify-between`}
                 >
                   <div>
                     {/* Header matching font style */}
@@ -2824,6 +2834,13 @@ export default function App() {
                       </div>
                     )}
                   </div>
+                  
+                  {/* A4 Page Break Guide (Only visible on screen, hidden on print) */}
+                  <div className="absolute left-0 right-0 top-[876px] border-b-2 border-dashed border-red-300 pointer-events-none print:hidden flex justify-between items-center px-4 z-10 select-none">
+                    <span className="text-[9px] bg-red-50 text-red-500 font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border border-red-100 shadow-xs -mt-2.5">A4 Page 1 End</span>
+                    <span className="text-[9px] bg-red-50 text-red-500 font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border border-red-100 shadow-xs -mt-2.5">A4 Page 2 Start</span>
+                  </div>
+
                 </div>
               )}
             </div>
