@@ -2330,7 +2330,7 @@ export default function App() {
                       <div 
                         key={pageNum}
                         id={pageNum === 1 ? "resume-preview" : "resume-preview-page-2"}
-                        className={`relative w-[620px] h-[876px] max-h-[876px] min-h-[876px] bg-white p-10 text-slate-900 border border-slate-300 font-${fontFamily} shadow-lg overflow-hidden flex flex-col justify-between print:mb-0 print:shadow-none print:border-none resume-page`}
+                        className={`relative w-[794px] h-[1123px] max-h-[1123px] min-h-[1123px] bg-white p-[20mm] text-slate-900 border border-slate-300 font-${fontFamily} shadow-lg overflow-hidden flex flex-col justify-between print:mb-0 print:shadow-none print:border-none resume-page`}
                       >
                         {/* Subtly show Page Header on Page 2 (for premium aesthetics, hidden on print) */}
                         {pageNum === 2 && (
@@ -2343,154 +2343,228 @@ export default function App() {
                         <div>
                           {/* -------------------- TEMPLATE 1: PROFESSIONAL POLISH (CLASSIC) -------------------- */}
                           {template === "professional" && (
-                            <div className={densitySpacing[spacingDensity].container}>
+                            <div className="flex flex-col h-full justify-between">
                               {/* Header bar - only on Page 1 */}
                               {pageNum === 1 && (
-                                <div className={`border-b-4 pb-5 ${densitySpacing[spacingDensity].header} ${ACCENT_COLORS[accentColor]?.borderPrimary || "border-blue-600"}`}>
-                                  <h1 className="text-3xl font-extrabold tracking-tight text-slate-950 uppercase">{resume.personalInfo.fullName || "Your Full Name"}</h1>
-                                  <p className={`font-bold text-sm tracking-wide mt-0.5 ${primaryText}`}>{resume.personalInfo.jobTitle || "Your Target Job Title"}</p>
-                                  
-                                  <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-                                    {resume.personalInfo.email && (
-                                      <span className="flex items-center gap-1">
-                                        <Mail className={`w-2.5 h-2.5 ${primaryText}`} />
-                                        {resume.personalInfo.email}
-                                      </span>
-                                    )}
-                                    {resume.personalInfo.phone && (
-                                      <span className="flex items-center gap-1">
-                                        <Phone className={`w-2.5 h-2.5 ${primaryText}`} />
-                                        {resume.personalInfo.phone}
-                                      </span>
-                                    )}
-                                    {resume.personalInfo.location && (
-                                      <span className="flex items-center gap-1">
-                                        <MapPin className={`w-2.5 h-2.5 ${primaryText}`} />
-                                        {resume.personalInfo.location}
-                                      </span>
-                                    )}
-                                    {resume.personalInfo.website && (
-                                      <span className="flex items-center gap-1">
-                                        <Globe className={`w-2.5 h-2.5 ${primaryText}`} />
-                                        {resume.personalInfo.website}
-                                      </span>
-                                    )}
+                                <div className="flex justify-between items-center border-b pb-6 mb-6">
+                                  {/* Left side: Name and Title with vertical accent bar */}
+                                  <div className="border-l-[5px] border-slate-400 pl-4 py-1">
+                                    <h1 className="text-2xl font-black text-slate-900 uppercase tracking-tight leading-none">
+                                      {resume.personalInfo.fullName || "Your Full Name"}
+                                    </h1>
+                                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mt-2 leading-none">
+                                      {resume.personalInfo.jobTitle || "Your Target Job Title"}
+                                    </p>
                                   </div>
-                                </div>
-                              )}
 
-                              {/* Summary */}
-                              {resume.summary && isSectionVisible("summary", pageNum) && (
-                                <div className="mt-4">
-                                  <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Executive Profile</h3>
-                                  <p className="text-xs text-slate-700 leading-relaxed font-medium text-justify">{resume.summary}</p>
-                                </div>
-                              )}
-
-                              {/* Work Experience */}
-                              {resume.experiences.length > 0 && isSectionVisible("experience", pageNum) && (
-                                <div className="mt-4">
-                                  <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-3">Professional Experience</h3>
-                                  
-                                  <div className={densitySpacing[spacingDensity].experience}>
-                                    {resume.experiences.map((exp) => (
-                                      <div key={exp.id} className="group relative">
-                                        <div className="flex justify-between items-start font-bold text-slate-900 text-xs">
-                                          <span className="text-slate-950 font-black">{exp.position} &mdash; <span className="text-slate-700 font-bold">{exp.company}</span></span>
-                                          <span className="text-[10px] text-slate-500 uppercase tracking-wider shrink-0">{exp.startDate} &mdash; {exp.current ? "Present" : exp.endDate}</span>
-                                        </div>
-                                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider -mt-0.5">{exp.location}</p>
-                                        
-                                        <div className="text-[11px] text-slate-700 mt-2 space-y-1 whitespace-pre-line leading-relaxed text-justify">
-                                          {exp.description}
+                                  {/* Right side: Contact Details stacked vertically with rounded black circular icons */}
+                                  <div className="text-[10px] text-slate-600 font-medium space-y-1.5 min-w-[180px]">
+                                    {resume.personalInfo.phone && (
+                                      <div className="flex items-center gap-2 justify-end">
+                                        <span className="text-right">{resume.personalInfo.phone}</span>
+                                        <div className="bg-slate-900 text-white rounded-full flex items-center justify-center w-[18px] h-[18px] shrink-0">
+                                          <Phone className="w-2.5 h-2.5" />
                                         </div>
                                       </div>
-                                    ))}
+                                    )}
+                                    {resume.personalInfo.email && (
+                                      <div className="flex items-center gap-2 justify-end">
+                                        <span className="text-right">{resume.personalInfo.email}</span>
+                                        <div className="bg-slate-900 text-white rounded-full flex items-center justify-center w-[18px] h-[18px] shrink-0">
+                                          <Mail className="w-2.5 h-2.5" />
+                                        </div>
+                                      </div>
+                                    )}
+                                    {resume.personalInfo.location && (
+                                      <div className="flex items-center gap-2 justify-end">
+                                        <span className="text-right">{resume.personalInfo.location}</span>
+                                        <div className="bg-slate-900 text-white rounded-full flex items-center justify-center w-[18px] h-[18px] shrink-0">
+                                          <MapPin className="w-2.5 h-2.5" />
+                                        </div>
+                                      </div>
+                                    )}
+                                    {(resume.personalInfo.linkedin || resume.personalInfo.website) && (
+                                      <div className="flex items-center gap-2 justify-end">
+                                        <span className="text-right truncate max-w-[155px]">
+                                          {resume.personalInfo.linkedin || resume.personalInfo.website}
+                                        </span>
+                                        <div className="bg-slate-900 text-white rounded-full flex items-center justify-center w-[18px] h-[18px] shrink-0">
+                                          <Globe className="w-2.5 h-2.5" />
+                                        </div>
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               )}
 
-                              {/* Grid of Skills & Education */}
-                              {(showLeftT1 || showRightT1) && (
-                                <div className={`grid grid-cols-12 mt-4 ${densitySpacing[spacingDensity].gridGap}`}>
-                                  
-                                  {/* Left: Education & Certs */}
-                                  {showLeftT1 && (
-                                    <div className={`${showRightT1 ? "col-span-7" : "col-span-12"} ${densitySpacing[spacingDensity].sectionGap}`}>
-                                      {resume.educations.length > 0 && isSectionVisible("education", pageNum) && (
-                                        <div>
-                                          <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2.5">Academic Qualifications</h3>
-                                          <div className={densitySpacing[spacingDensity].itemGap}>
-                                            {resume.educations.map((edu) => (
-                                              <div key={edu.id} className="text-xs">
-                                                <div className="flex justify-between font-bold text-slate-900">
-                                                  <span className="font-extrabold text-slate-950">{edu.degree}</span>
-                                                  <span className="text-[9px] text-slate-500 uppercase tracking-wider shrink-0">{edu.startDate} &mdash; {edu.current ? "Present" : edu.endDate}</span>
-                                                </div>
-                                                <p className={`text-[10px] font-bold ${primaryText}`}>{edu.school} {edu.gpa && <span className="text-slate-500 font-medium">({edu.gpa})</span>}</p>
-                                                {edu.description && <p className="text-[10px] text-slate-650 mt-1 leading-normal">{edu.description}</p>}
-                                              </div>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      )}
-
-                                      {resume.certifications.length > 0 && isSectionVisible("certifications", pageNum) && (
-                                        <div className="mt-3">
-                                          <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Professional Accreditations</h3>
-                                          <ul className={`list-disc pl-3 text-xs ${densitySpacing[spacingDensity].itemGap}`}>
-                                            {resume.certifications.map((cert) => (
-                                              <li key={cert.id} className="text-[10px] text-slate-700 font-medium">
-                                                <span className="font-bold text-slate-900">{cert.name}</span> &mdash; <span className="text-slate-500 font-semibold">{cert.issuer}</span> {cert.date && `(${cert.date})`}
-                                              </li>
-                                            ))}
-                                          </ul>
-                                        </div>
-                                      )}
-                                    </div>
-                                  )}
-
-                                  {/* Right: Technical Skills & Projects */}
-                                  {showRightT1 && (
-                                    <div className={`${showLeftT1 ? "col-span-5" : "col-span-12"} ${densitySpacing[spacingDensity].sectionGap}`}>
-                                      {resume.skills.length > 0 && isSectionVisible("skills", pageNum) && (
-                                        <div>
-                                          <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2.5">Technical Expertise</h3>
-                                          <div className={densitySpacing[spacingDensity].itemGap}>
-                                            {resume.skills.map((cat) => (
-                                              <div key={cat.id}>
-                                                <h4 className="text-[10px] font-black text-slate-800 uppercase tracking-wider">{cat.name}</h4>
-                                                <p className="text-[10px] text-slate-655 mt-0.5 leading-relaxed font-semibold">
-                                                  {cat.skills.join(", ")}
-                                                </p>
-                                              </div>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      )}
-
-                                      {resume.projects.length > 0 && isSectionVisible("projects", pageNum) && (
-                                        <div className="mt-3">
-                                          <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1 mb-2">Key Projects</h3>
-                                          <div className={densitySpacing[spacingDensity].itemGap}>
-                                            {resume.projects.map((proj) => (
-                                              <div key={proj.id} className="text-[11px]">
-                                                <div className="font-bold text-slate-900 flex justify-between">
-                                                  <span className="font-extrabold text-slate-955 truncate">{proj.name}</span>
-                                                  <span className="text-[9px] text-slate-400 shrink-0">{proj.startDate}</span>
-                                                </div>
-                                                <p className={`text-[9px] font-bold ${primaryText}`}>{proj.role}</p>
-                                                <p className="text-[10px] text-slate-650 mt-1 leading-normal text-justify">{proj.description}</p>
-                                              </div>
-                                            ))}
-                                          </div>
-                                        </div>
-                                      )}
-                                    </div>
-                                  )}
-
+                              {/* Professional Overview - only on Page 1 */}
+                              {pageNum === 1 && resume.summary && isSectionVisible("summary", pageNum) && (
+                                <div className="mb-6">
+                                  <h2 className="text-xs font-black text-slate-900 uppercase tracking-wider mb-2">
+                                    Professional Overview
+                                  </h2>
+                                  <p className="text-[10px] text-slate-600 leading-relaxed text-justify font-medium">
+                                    {resume.summary}
+                                  </p>
                                 </div>
                               )}
+
+                              {/* Two Column Layout split with a vertical line */}
+                              <div className="grid grid-cols-12 gap-6 flex-1">
+                                {/* Left Column: Work Experience and Projects (wider column) */}
+                                <div className="col-span-8 pr-6 border-r border-slate-200 flex flex-col gap-6">
+                                  {/* Work Experience */}
+                                  {resume.experiences.length > 0 && isSectionVisible("experience", pageNum) && (
+                                    <div>
+                                      <h2 className="text-xs font-black text-slate-900 uppercase tracking-wider mb-4">
+                                        Work Experience
+                                      </h2>
+                                      <div className="space-y-4">
+                                        {resume.experiences.map((exp) => (
+                                          <div key={exp.id} className="group relative">
+                                            <h3 className="text-[11px] font-bold text-slate-800 leading-tight">
+                                              {exp.position}
+                                            </h3>
+                                            <p className="text-[9px] text-slate-500 font-semibold mt-0.5">
+                                              {exp.company} {exp.location ? `, ${exp.location}` : ""} | {exp.startDate} &mdash; {exp.current ? "Present" : exp.endDate}
+                                            </p>
+                                            <ul className="mt-2 space-y-1.5 list-disc pl-4 text-[10px] text-slate-600 font-medium">
+                                              {exp.description.split("\n").map((bullet, idx) => {
+                                                const cleanBullet = bullet.replace(/^\s*-\s*/, "").trim();
+                                                if (!cleanBullet) return null;
+                                                return (
+                                                  <li key={idx} className="leading-relaxed text-justify">
+                                                    {cleanBullet}
+                                                  </li>
+                                                );
+                                              })}
+                                            </ul>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {/* Projects */}
+                                  {resume.projects.length > 0 && isSectionVisible("projects", pageNum) && (
+                                    <div className="mt-2">
+                                      <h2 className="text-xs font-black text-slate-900 uppercase tracking-wider mb-4">
+                                        Projects
+                                      </h2>
+                                      <div className="space-y-4">
+                                        {resume.projects.map((proj) => (
+                                          <div key={proj.id}>
+                                            <h3 className="text-[11px] font-bold text-slate-800 leading-tight">
+                                              {proj.name}
+                                            </h3>
+                                            <p className="text-[9px] text-slate-500 font-semibold mt-0.5">
+                                              {proj.role} | {proj.startDate}
+                                            </p>
+                                            <p className="text-[10px] text-slate-600 mt-1.5 leading-relaxed text-justify font-medium">
+                                              {proj.description}
+                                            </p>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* Right Column: Education, Skills, Achievements, Professional Development */}
+                                <div className="col-span-4 flex flex-col gap-6">
+                                  {/* Education */}
+                                  {resume.educations.length > 0 && isSectionVisible("education", pageNum) && (
+                                    <div>
+                                      <h2 className="text-xs font-black text-slate-900 uppercase tracking-wider mb-3">
+                                        Education
+                                      </h2>
+                                      <div className="space-y-3">
+                                        {resume.educations.map((edu) => (
+                                          <div key={edu.id}>
+                                            <h3 className="text-[10px] font-bold text-slate-800 uppercase tracking-tight leading-tight">
+                                              {edu.degree}
+                                            </h3>
+                                            <p className="text-[10px] text-slate-500 font-semibold mt-0.5">
+                                              {edu.school}
+                                            </p>
+                                            <p className="text-[9px] text-slate-400 font-bold mt-0.5">
+                                              {edu.startDate} &mdash; {edu.current ? "Present" : edu.endDate}
+                                            </p>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {/* Skills */}
+                                  {resume.skills.length > 0 && isSectionVisible("skills", pageNum) && (
+                                    <div>
+                                      <h2 className="text-xs font-black text-slate-900 uppercase tracking-wider mb-3">
+                                        Skills
+                                      </h2>
+                                      <ul className="space-y-1.5 list-disc pl-4 text-[10px] text-slate-600 font-semibold">
+                                        {resume.skills.flatMap(cat => cat.skills).map((skill, idx) => (
+                                          <li key={idx} className="leading-tight">
+                                            {skill}
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  )}
+
+                                  {/* Achievements */}
+                                  {resume.certifications.length > 0 && isSectionVisible("certifications", pageNum) && (
+                                    <div>
+                                      <h2 className="text-xs font-black text-slate-900 uppercase tracking-wider mb-3">
+                                        Achievements
+                                      </h2>
+                                      <div className="space-y-3">
+                                        {resume.certifications.slice(0, Math.ceil(resume.certifications.length / 2)).map((cert) => (
+                                          <div key={cert.id}>
+                                            <h3 className="text-[10px] font-bold text-slate-800 uppercase tracking-tight leading-tight">
+                                              {cert.name}
+                                            </h3>
+                                            <p className="text-[10px] text-slate-500 font-semibold mt-0.5">
+                                              {cert.issuer}
+                                            </p>
+                                            {cert.date && (
+                                              <p className="text-[9px] text-slate-400 font-bold mt-0.5">
+                                                {cert.date}
+                                              </p>
+                                            )}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {/* Professional Development */}
+                                  {resume.certifications.length > 1 && isSectionVisible("certifications", pageNum) && (
+                                    <div>
+                                      <h2 className="text-xs font-black text-slate-900 uppercase tracking-wider mb-3">
+                                        Professional Development
+                                      </h2>
+                                      <div className="space-y-3">
+                                        {resume.certifications.slice(Math.ceil(resume.certifications.length / 2)).map((cert) => (
+                                          <div key={cert.id}>
+                                            <h3 className="text-[10px] font-bold text-slate-800 uppercase tracking-tight leading-tight">
+                                              {cert.name}
+                                            </h3>
+                                            <p className="text-[10px] text-slate-500 font-semibold mt-0.5">
+                                              {cert.issuer}
+                                            </p>
+                                            {cert.date && (
+                                              <p className="text-[9px] text-slate-400 font-bold mt-0.5">
+                                                {cert.date}
+                                              </p>
+                                            )}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
                             </div>
                           )}
 
@@ -2629,44 +2703,44 @@ export default function App() {
 
                           {/* -------------------- TEMPLATE 3: BOLD CREATIVE (VIBRANT) -------------------- */}
                           {template === "creative" && (
-                            <div className="grid grid-cols-12 gap-6 h-[796px]">
+                            <div className="absolute inset-0 grid grid-cols-12 h-full w-full bg-white select-text">
                               {/* Sidebar left: colored background accent column */}
-                              <div className={`col-span-4 text-slate-200 -m-10 p-7 flex flex-col justify-start ${bgPrimary} ${densitySpacing[spacingDensity].container}`}>
+                              <div className={`col-span-4 text-slate-200 pt-[16mm] pb-[16mm] pl-[12mm] pr-[8mm] flex flex-col justify-start h-full ${bgPrimary}`}>
                                 {/* Header / Identity - only on Page 1 */}
                                 {pageNum === 1 && (
-                                  <div>
-                                    <h2 className="text-xl font-black text-white tracking-tight uppercase leading-tight">{resume.personalInfo.fullName || "Your Full Name"}</h2>
-                                    <p className="text-white/80 font-bold text-[10px] uppercase tracking-wider mt-1.5">{resume.personalInfo.jobTitle || "Your Target Job Title"}</p>
+                                  <div className="mb-6">
+                                    <h2 className="text-lg font-black text-white tracking-tight uppercase leading-tight">{resume.personalInfo.fullName || "Your Full Name"}</h2>
+                                    <p className="text-white/80 font-bold text-[9px] uppercase tracking-widest mt-2">{resume.personalInfo.jobTitle || "Your Target Job Title"}</p>
                                   </div>
                                 )}
 
                                 {/* Contact Info Card - only on Page 1 */}
                                 {pageNum === 1 && (
-                                  <div className="space-y-3.5 pt-3 border-t border-white/20 text-[10px] mt-3">
-                                    <h3 className="font-extrabold uppercase tracking-widest text-white/60 text-[9px]">Contact</h3>
+                                  <div className="space-y-3 pt-3 border-t border-white/20 text-[10px] mb-6">
+                                    <h3 className="font-extrabold uppercase tracking-widest text-white/50 text-[8px] mb-1.5">Contact</h3>
                                     
                                     {resume.personalInfo.email && (
                                       <div className="space-y-0.5">
-                                        <span className="text-white/40 font-bold uppercase tracking-tight block">Email</span>
-                                        <span className="text-slate-100 break-all">{resume.personalInfo.email}</span>
+                                        <span className="text-white/40 font-bold uppercase tracking-tight block text-[8px]">Email</span>
+                                        <span className="text-slate-100 break-all text-[9.5px] font-semibold">{resume.personalInfo.email}</span>
                                       </div>
                                     )}
                                     {resume.personalInfo.phone && (
                                       <div className="space-y-0.5">
-                                        <span className="text-white/40 font-bold uppercase tracking-tight block">Phone</span>
-                                        <span className="text-slate-100">{resume.personalInfo.phone}</span>
+                                        <span className="text-white/40 font-bold uppercase tracking-tight block text-[8px]">Phone</span>
+                                        <span className="text-slate-100 text-[9.5px] font-semibold">{resume.personalInfo.phone}</span>
                                       </div>
                                     )}
                                     {resume.personalInfo.location && (
                                       <div className="space-y-0.5">
-                                        <span className="text-white/40 font-bold uppercase tracking-tight block">Address</span>
-                                        <span className="text-slate-100">{resume.personalInfo.location}</span>
+                                        <span className="text-white/40 font-bold uppercase tracking-tight block text-[8px]">Address</span>
+                                        <span className="text-slate-100 text-[9.5px] font-semibold">{resume.personalInfo.location}</span>
                                       </div>
                                     )}
-                                    {resume.personalInfo.website && (
+                                    {(resume.personalInfo.linkedin || resume.personalInfo.website) && (
                                       <div className="space-y-0.5">
-                                        <span className="text-white/40 font-bold uppercase tracking-tight block">Web</span>
-                                        <span className="text-white truncate block font-bold underline">{resume.personalInfo.website}</span>
+                                        <span className="text-white/40 font-bold uppercase tracking-tight block text-[8px]">Web / LinkedIn</span>
+                                        <span className="text-white truncate block text-[9.5px] font-bold underline">{resume.personalInfo.linkedin || resume.personalInfo.website}</span>
                                       </div>
                                     )}
                                   </div>
@@ -2674,14 +2748,14 @@ export default function App() {
 
                                 {/* Skill categories styled as dark chips */}
                                 {resume.skills.length > 0 && isSectionVisible("skills", pageNum) && (
-                                  <div className={`space-y-3 pt-3 border-t border-white/20 ${pageNum === 1 ? "mt-3" : ""}`}>
-                                    <h3 className="font-extrabold uppercase tracking-widest text-white/60 text-[9px]">Core Competencies</h3>
+                                  <div className={`space-y-3.5 pt-3.5 border-t border-white/20 mb-6 ${pageNum === 1 ? "" : "mt-0"}`}>
+                                    <h3 className="font-extrabold uppercase tracking-widest text-white/50 text-[8px] mb-2">Core Competencies</h3>
                                     {resume.skills.map((cat) => (
                                       <div key={cat.id} className="space-y-1.5">
-                                        <span className="text-slate-200 font-bold text-[9px] uppercase tracking-wide block">{cat.name}</span>
+                                        <span className="text-slate-200 font-bold text-[8.5px] uppercase tracking-wider block">{cat.name}</span>
                                         <div className="flex flex-wrap gap-1">
                                           {cat.skills.map((s, si) => (
-                                            <span key={si} className="px-1.5 py-0.5 bg-black/20 text-white rounded text-[8px] font-bold uppercase tracking-tight border border-white/10">
+                                            <span key={si} className="px-1.5 py-0.5 bg-black/25 text-white rounded text-[8px] font-bold uppercase tracking-tight border border-white/5">
                                               {s}
                                             </span>
                                           ))}
@@ -2694,12 +2768,12 @@ export default function App() {
                                 {/* Certifications as simple bullet cards */}
                                 {resume.certifications.length > 0 && isSectionVisible("certifications", pageNum) && (
                                   <div className="space-y-3 pt-3 border-t border-white/20 mt-3">
-                                    <h3 className="font-extrabold uppercase tracking-widest text-white/60 text-[9px]">Accreditations</h3>
+                                    <h3 className="font-extrabold uppercase tracking-widest text-white/60 text-[8px] mb-2">Accreditations</h3>
                                     <div className="space-y-2 text-[9px]">
                                       {resume.certifications.map((cert) => (
-                                        <div key={cert.id} className="bg-black/10 p-1.5 rounded border border-white/10">
-                                          <p className="font-bold text-white leading-tight">{cert.name}</p>
-                                          <p className="text-white/50 text-[8px] mt-0.5">{cert.issuer}</p>
+                                        <div key={cert.id} className="bg-black/15 p-2 rounded border border-white/5">
+                                          <p className="font-bold text-white leading-tight text-[9.5px]">{cert.name}</p>
+                                          <p className="text-white/50 text-[8px] mt-0.5 font-medium">{cert.issuer}</p>
                                         </div>
                                       ))}
                                     </div>
@@ -2708,20 +2782,27 @@ export default function App() {
                               </div>
 
                               {/* Main side right: content columns */}
-                              <div className={`col-span-8 pl-6 ${densitySpacing[spacingDensity].container}`}>
-                                
+                              <div className={`col-span-8 pt-[16mm] pb-[16mm] pl-[10mm] pr-[16mm] flex flex-col justify-start h-full ${densitySpacing[spacingDensity].container}`}>
+                                {/* Embedded Page Indicator - only on Page 2 */}
+                                {pageNum === 2 && (
+                                  <div className="text-[9px] text-slate-400 border-b pb-1 mb-2 flex justify-between font-mono print:hidden select-none">
+                                    <span>{resume.personalInfo.fullName || "Your Name"} &mdash; Page 2</span>
+                                    <span>Multi-Page Document</span>
+                                  </div>
+                                )}
+
                                 {/* Summary text */}
                                 {resume.summary && isSectionVisible("summary", pageNum) && (
-                                  <div className="pb-3 border-b border-slate-150">
-                                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Professional Overview</h3>
-                                    <p className="text-xs text-slate-700 leading-relaxed font-semibold text-justify">{resume.summary}</p>
+                                  <div className="pb-3.5 border-b border-slate-200">
+                                    <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Professional Overview</h3>
+                                    <p className="text-[10.5px] text-slate-700 leading-relaxed font-semibold text-justify">{resume.summary}</p>
                                   </div>
                                 )}
 
                                 {/* Work History */}
                                 {resume.experiences.length > 0 && isSectionVisible("experience", pageNum) && (
-                                  <div className="space-y-3 mt-3">
-                                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-150 pb-1">Work History</h3>
+                                  <div className="space-y-3">
+                                    <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1">Work History</h3>
                                     
                                     <div className={densitySpacing[spacingDensity].experience}>
                                       {resume.experiences.map((exp) => (
@@ -2731,11 +2812,19 @@ export default function App() {
                                               <h4 className="text-xs font-black text-slate-900">{exp.position}</h4>
                                               <p className={`text-[10px] font-bold ${primaryText}`}>{exp.company}</p>
                                             </div>
-                                            <span className="text-[9px] text-slate-500 uppercase tracking-widest font-black shrink-0">{exp.startDate} &mdash; {exp.current ? "Present" : exp.endDate}</span>
+                                            <span className="text-[9px] text-slate-550 uppercase tracking-widest font-black shrink-0">{exp.startDate} &mdash; {exp.current ? "Present" : exp.endDate}</span>
                                           </div>
-                                          <div className="text-[10.5px] text-slate-655 mt-1.5 leading-relaxed whitespace-pre-line text-justify font-medium">
-                                            {exp.description}
-                                          </div>
+                                          <ul className="mt-2 space-y-1 list-disc pl-4 text-[10px] text-slate-650 font-medium">
+                                            {exp.description.split("\n").map((bullet, idx) => {
+                                              const cleanBullet = bullet.replace(/^\s*[-\u2022\u25E6]\s*/, "").trim();
+                                              if (!cleanBullet) return null;
+                                              return (
+                                                <li key={idx} className="leading-relaxed text-justify">
+                                                  {cleanBullet}
+                                                </li>
+                                              );
+                                            })}
+                                          </ul>
                                         </div>
                                       ))}
                                     </div>
@@ -2744,13 +2833,13 @@ export default function App() {
 
                                 {/* Education list */}
                                 {resume.educations.length > 0 && isSectionVisible("education", pageNum) && (
-                                  <div className="space-y-2.5 mt-3">
-                                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-150 pb-1">Education Background</h3>
+                                  <div className="space-y-2.5">
+                                    <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1">Education Background</h3>
                                     <div className={densitySpacing[spacingDensity].itemGap}>
                                       {resume.educations.map((edu) => (
                                         <div key={edu.id} className="text-xs">
                                           <div className="flex justify-between font-bold text-slate-900">
-                                            <span className="font-extrabold text-slate-955">{edu.degree}</span>
+                                            <span className="font-extrabold text-slate-955 text-[11px]">{edu.degree}</span>
                                             <span className="text-[9px] text-slate-400 font-medium">{edu.startDate} &mdash; {edu.endDate}</span>
                                           </div>
                                           <p className="text-[10px] text-slate-600 font-semibold">{edu.school} {edu.gpa && <span className="text-slate-400">({edu.gpa})</span>}</p>
@@ -2762,17 +2851,17 @@ export default function App() {
 
                                 {/* Showcase projects */}
                                 {resume.projects.length > 0 && isSectionVisible("projects", pageNum) && (
-                                  <div className="space-y-2.5 mt-3">
-                                    <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-150 pb-1">Showcase Projects</h3>
+                                  <div className="space-y-2.5">
+                                    <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-200 pb-1">Showcase Projects</h3>
                                     <div className={densitySpacing[spacingDensity].itemGap}>
                                       {resume.projects.map((p) => (
                                         <div key={p.id} className="text-[11px]">
                                           <div className="flex justify-between font-extrabold text-slate-955">
-                                            <span className="text-slate-900 font-bold">{p.name}</span>
+                                            <span className="text-slate-900 font-bold text-[11px]">{p.name}</span>
                                             <span className="text-[9px] text-slate-400 font-medium">{p.startDate}</span>
                                           </div>
                                           <p className={`text-[9px] font-extrabold uppercase ${primaryText}`}>{p.role}</p>
-                                          <p className="text-[10px] text-slate-650 mt-1 leading-normal text-justify">{p.description}</p>
+                                          <p className="text-[10px] text-slate-650 mt-1 leading-normal text-justify font-medium">{p.description}</p>
                                         </div>
                                       ))}
                                     </div>
@@ -2955,7 +3044,7 @@ export default function App() {
               ) : (
                 <div 
                   id="cover-letter-preview"
-                  className={`relative w-[620px] min-h-[876px] bg-white p-12 text-slate-900 border border-slate-300 shadow-lg print:shadow-none print:border-none font-${fontFamily} flex flex-col justify-between`}
+                  className={`relative w-[794px] h-[1123px] max-h-[1123px] min-h-[1123px] bg-white p-[20mm] text-slate-900 border border-slate-300 shadow-lg print:shadow-none print:border-none font-${fontFamily} flex flex-col justify-between resume-page`}
                 >
                   <div>
                     {/* Header matching font style */}
@@ -3035,7 +3124,7 @@ export default function App() {
                   </div>
                   
                   {/* A4 Page Break Guide (Only visible on screen, hidden on print) */}
-                  <div className="absolute left-0 right-0 top-[876px] border-b-2 border-dashed border-red-300 pointer-events-none print:hidden flex justify-between items-center px-4 z-10 select-none">
+                  <div className="absolute left-0 right-0 top-[1123px] border-b-2 border-dashed border-red-300 pointer-events-none print:hidden flex justify-between items-center px-4 z-10 select-none">
                     <span className="text-[9px] bg-red-50 text-red-500 font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border border-red-100 shadow-xs -mt-2.5">A4 Page 1 End</span>
                     <span className="text-[9px] bg-red-50 text-red-500 font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border border-red-100 shadow-xs -mt-2.5">A4 Page 2 Start</span>
                   </div>
