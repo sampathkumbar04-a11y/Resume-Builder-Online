@@ -2292,7 +2292,10 @@ export default function App() {
                   </>
                 )}
               </div>
-           {/* Interactive Scaled Resume Wrapper */}
+            </div>
+          )}
+
+          {/* Interactive Scaled Resume Wrapper */}
           <div className="flex-1 w-full overflow-y-auto flex justify-center items-start pb-10 print:overflow-visible print:pb-0 print:block">
             <div 
               style={{ transform: `scale(${previewZoom})` }} 
